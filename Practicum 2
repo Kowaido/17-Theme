@@ -1,0 +1,345 @@
+class Employee
+    {
+        /// <summary>
+        /// Поле фамилия
+        /// </summary>
+        private string surname;
+        /// <summary>
+        /// Поле имя
+        /// </summary>
+        private string name;
+        /// <summary>
+        /// Поле минимальной-зарпалаты
+        /// </summary>
+        private double p;
+        /// <summary>
+        /// Поле коэфицента
+        /// </summary>
+        private double k;
+
+        /// <summary>
+        /// Свойство Фамилия
+        /// </summary>
+        public string Surname { get { return surname; } set { surname = value; } }
+        /// <summary>
+        /// Свойство Имя
+        /// </summary>
+        public string Name { get { return name; } set { name = value; } }
+        /// <summary>
+        /// Свойство Минимальная-зарплата
+        /// </summary>
+        public double P { get { return p; } set { p = value; } }
+        /// <summary>
+        /// Свойство Коэфицент
+        /// </summary>
+        public double K { get { return k; } set { k = value; } }
+
+        /// <summary>
+        /// Конструктор без параметров
+        /// </summary>
+        public Employee()
+        {
+
+        }
+
+        /// <summary>
+        /// Конструктор с одним параметром
+        /// </summary>
+        /// <param name="surname"></param>
+        public Employee(string surname)
+        {
+            this.surname = surname;
+        }
+
+        /// <summary>
+        /// Конструктор с двумя параметрами
+        /// </summary>
+        /// <param name="surname"></param>
+        /// <param name="name"></param>
+        public Employee(string surname, string name): this(surname)
+        {
+            this.name = name;
+        }
+
+        /// <summary>
+        /// Конструктор с тремя параметрами
+        /// </summary>
+        /// <param name="surname"></param>
+        /// <param name="name"></param>
+        /// <param name="p"></param>
+        public Employee(string surname, string name, double p): this(surname, name)
+        {
+            this.p = p;
+        }
+
+        /// <summary>
+        /// Конструктор с четырьмя параметрами
+        /// </summary>
+        /// <param name="surname"></param>
+        /// <param name="name"></param>
+        /// <param name="p"></param>
+        /// <param name="k"></param>
+        public Employee(string surname, string name, double p, double k): this(surname, name, p)
+        {
+            this.k = k;
+        }
+
+        /// <summary>
+        /// Метод для вывода информации о сотруднике
+        /// </summary>
+        public virtual void Print()
+        {
+            Console.WriteLine($"Фамилия={Surname}, Имя={Name}, Минимальная-зарплата={P}, Коэфицент={K}");
+        }
+
+        /// <summary>
+        /// Метод для подсчёта между коэфицентом и зарплатой
+        /// </summary>
+        /// <returns></returns>
+        public double Incomecalcul()
+        {
+            return k * p;
+        }
+
+class Engineer : Employee
+    {
+        /// <summary>
+        /// Поле разработаных-приложений
+        /// </summary>
+        private int n;
+
+        /// <summary>
+        /// Конструктор без параметров
+        /// </summary>
+        public Engineer()
+        {
+
+        }
+
+        /// <summary>
+        /// Констуктор с параметрами базового класса и данного класса
+        /// </summary>
+        /// <param name="surname"></param>
+        /// <param name="name"></param>
+        /// <param name="p"></param>
+        /// <param name="k"></param>
+        /// <param name="n"></param>
+        public Engineer(string surname, string name, double p, double k, int n)
+            :base(surname, name, p, k)
+        {
+            this.n = n;
+        }
+
+        /// <summary>
+        /// Свойство Разработаных-Приложений
+        /// </summary>
+        public int N { get { return n; } set { n = value; } }
+        
+        /// <summary>
+        /// Метод для вывода информации по количеству разработаных приложений
+        /// </summary>
+        public override void Print()
+        {
+            base.Print();
+            Console.WriteLine($"Количество разработанных проектов: {n}");
+        }
+
+        /// <summary>
+        /// Метод для подсчёта разработанных приложений
+        /// </summary>
+        /// <returns></returns>
+        public new double Incomecalcul()
+        {
+            if (n > 10)
+                return base.Incomecalcul() * (n / 10.0);
+            else
+                return base.Incomecalcul();
+        }
+
+class Bus
+    {
+        /// <summary>
+        /// Поле марки
+        /// </summary>
+        private string brand;
+        /// <summary>
+        /// Поле количество-мест
+        /// </summary>
+        private int seatscount;
+        /// <summary>
+        /// Поле стоимости билета
+        /// </summary>
+        private double ticketcost;
+
+        /// <summary>
+        /// Конструктор без параметров
+        /// </summary>
+        public Bus()
+        {
+
+        }
+
+        /// <summary>
+        /// Конструктор с одним параметром
+        /// </summary>
+        /// <param name="brand"></param>
+        public Bus(string brand)
+        {
+            this.brand = brand;
+        }
+
+        /// <summary>
+        /// Конструктор с двумя параметрами
+        /// </summary>
+        /// <param name="brand"></param>
+        /// <param name="seatscount"></param>
+        public Bus(string brand, int seatscount)
+            :this(brand)
+        {
+            this.seatscount = seatscount;
+        }
+
+        /// <summary>
+        /// Констурктор с тремя параметрами
+        /// </summary>
+        /// <param name="brand"></param>
+        /// <param name="seatscount"></param>
+        /// <param name="ticketcost"></param>
+        public Bus(string brand, int seatscount, double ticketcost)
+            :this(brand, seatscount)
+        {
+            this.ticketcost = ticketcost;
+        }
+
+        /// <summary>
+        /// Свойство Марка
+        /// </summary>
+        public string Brand { get { return brand; } set { brand = value; } }
+        /// <summary>
+        /// Свойство Количество-мест
+        /// </summary>
+        public int Seatscount { get { return seatscount; } set { seatscount = value; } }
+        /// <summary>
+        /// Свойство Стоимость Билета
+        /// </summary>
+        public double Ticketcost { get { return ticketcost; }set { ticketcost = value; } }
+
+        /// <summary>
+        /// Метод для вывода стоимости поездки
+        /// </summary>
+        /// <returns></returns>
+        public virtual double TotalCost()
+        {
+            return seatscount * ticketcost;
+        }
+
+class TouristBus : Bus
+    {
+        /// <summary>
+        /// Поле стоимость-экскурсии
+        /// </summary>
+        private double excursioncost;
+
+        /// <summary>
+        /// Конструктор без параметров
+        /// </summary>
+        public TouristBus()
+        {
+
+        }
+
+        /// <summary>
+        /// Конструктор с параметрами базового класса и данного класса
+        /// </summary>
+        /// <param name="brand"></param>
+        /// <param name="seatcount"></param>
+        /// <param name="ticketcost"></param>
+        /// <param name="excursioncost"></param>
+        public TouristBus(string brand, int seatcount, double ticketcost, double excursioncost)
+            :base(brand, seatcount, ticketcost )
+        {
+            this.excursioncost = excursioncost;
+        }
+
+        /// <summary>
+        /// Свойство Стоимость-Экскурсии
+        /// </summary>
+       public double Excursioncost { get { return excursioncost; } set { excursioncost = value; } }
+         
+        /// <summary>
+        /// Метод для вывода общей стоимости
+        /// </summary>
+        /// <returns></returns>
+        public new double TotalCost()
+        {
+            return base.TotalCost() + (Seatscount * excursioncost);
+        }
+
+static void Main(string[] args)
+        {
+            Employee empl = new Employee();
+            //int N = int.Parse(Console.ReadLine());
+            //if(N>10)
+            //{
+            //    engineer.Icome();
+            //}
+            Console.Title = "Данные о работниках и о поездках на автобусах";
+            Console.WriteLine("Указывайте данные: ");
+            Console.WriteLine();
+            Console.WriteLine("Введите Фамилию: ");
+            empl.Surname = Console.ReadLine();
+            Console.WriteLine("Введите Имя: ");
+            empl.Name = Console.ReadLine();
+            Console.WriteLine("Введите Доход-минимальный: ");
+            empl.P = double.Parse(Console.ReadLine());
+            Console.WriteLine("Введите Коэфицент: ");
+            empl.K = double.Parse(Console.ReadLine());
+            empl.Print();
+            Console.WriteLine($"Доход сотрудника: {empl.Incomecalcul()}");
+
+            Console.WriteLine();
+            Engineer engineer = new Engineer();
+            Console.WriteLine("Введите Фамилию: ");
+            engineer.Surname = Console.ReadLine();
+            Console.WriteLine("Введите Имя: ");
+            engineer.Name = Console.ReadLine();
+            Console.WriteLine("Введите Доход-минимальный: ");
+            engineer.P = double.Parse(Console.ReadLine());
+            Console.WriteLine("Введите Коэфицент: ");
+            engineer.K = double.Parse(Console.ReadLine());
+            Console.WriteLine("Введите количество проектов: ");
+            double n = double.Parse(Console.ReadLine());
+            Console.WriteLine($"Ваше количество проектов: {n}");
+            //if (n > 10)
+            //{
+
+            //}
+            engineer.Print();
+            Console.WriteLine($"Доход инжинера: {engineer.Incomecalcul()}");
+
+            Console.WriteLine();
+            Bus bus = new Bus();
+            Console.WriteLine("Введите марку автобуса: ");
+            bus.Brand = Console.ReadLine();
+            Console.WriteLine("Введите количество мест: ");
+            bus.Seatscount = int.Parse(Console.ReadLine());
+            Console.WriteLine("Введите стоимость билета: ");
+            bus.Ticketcost = double.Parse(Console.ReadLine());
+            bus.TotalCost();
+            Console.WriteLine($"Вся стоимость: {bus.TotalCost()}");
+
+            Console.WriteLine();
+            TouristBus tobus = new TouristBus();
+            Console.WriteLine("Введите марку автобуса: ");
+            tobus.Brand = Console.ReadLine();
+            Console.WriteLine("Введите количество мест: ");
+            tobus.Seatscount = int.Parse(Console.ReadLine());
+            Console.WriteLine("Введите стоимость билета: ");
+            tobus.Ticketcost = double.Parse(Console.ReadLine());
+            Console.WriteLine("Введите стоимость экскурсии: ");
+            tobus.Excursioncost = double.Parse(Console.ReadLine());
+            tobus.TotalCost();
+            Console.WriteLine($"Вся стоимость: {tobus.TotalCost()}");
+
+            Console.ReadKey();
+        }
