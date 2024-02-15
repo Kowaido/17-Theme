@@ -1,0 +1,339 @@
+ class Employee
+    {
+        /// <summary>
+        /// Закрытые поля
+        /// </summary>
+        
+        /// <summary>
+        /// Поле имя
+        /// </summary>
+        private string name;
+        /// <summary>
+        /// Поле фамилия
+        /// </summary>
+        private string surname;
+        /// <summary>
+        /// Поле дата-рождения
+        /// </summary>
+        private DateTime datebirth;
+        /// <summary>
+        /// Поле минимального дохода
+        /// </summary>
+        private double p;
+
+        /// <summary>
+        /// Конструктор без параметров
+        /// </summary>
+        public Employee()
+        {
+
+        }
+
+        /// <summary>
+        /// Конструктор с одним параметром
+        /// </summary>
+        /// <param name="name"></param>
+        public Employee(string name)
+        {
+            this.name = name;
+        }
+
+        /// <summary>
+        /// Конструктор с двумя параметрами
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        public Employee(string name, string surname) : this(name)
+        {
+            this.surname = surname;
+        }
+
+        /// <summary>
+        /// Конструктор с тремя параметрами
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="datebirth"></param>
+        public Employee(string name, string surname, DateTime datebirth): this(name,surname)
+        {
+            this.datebirth = datebirth;
+        }
+
+        /// <summary>
+        /// Конструктор с четырьмя параметрами
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="datebirth"></param>
+        /// <param name="p"></param>
+        public Employee(string name, string surname, DateTime datebirth, double p): this(name, surname, datebirth)
+        {
+            this.p = p;
+        }
+
+        /// <summary>
+        /// Свойство Имя
+        /// </summary>
+        public string Name { get { return name; } set { name = value; } }
+        /// <summary>
+        /// Свойство Фамилии
+        /// </summary>
+        public string Surname { get { return surname; } set { surname = value; } }
+        /// <summary>
+        /// Свойство Дата-рождения
+        /// </summary>
+        public DateTime Datebirth { get { return datebirth; } set { datebirth = value; } }
+        /// <summary>
+        /// Свойство Минимальный доход
+        /// </summary>
+        public double P { get { return p; } set { p = value; } }
+
+        /// <summary>
+        /// Метод определяющий доход по коэфиценту с минимальной сумой
+        /// </summary>
+        /// <param name="k"></param>
+        /// <returns></returns>
+        public virtual double Incomecalculation(double k)
+        {
+            return k * p;
+        }
+
+        /// <summary>
+        /// Метод показывающий данные о том или ином сотруднике
+        /// </summary>
+        public virtual void Print()
+        {
+            Console.WriteLine("Данные по работникам: ");
+            Console.WriteLine($"Имя={Name},\tФамилия={Surname},\nДата-рождения={Datebirth},\nМинимальный доход={P}");
+        }
+
+ class Engineer: Employee
+    {
+        /// <summary>
+        /// Поле специализация
+        /// </summary>
+        private string specialization;
+
+        /// <summary>
+        /// Конструктор без параметров
+        /// </summary>
+        public Engineer()
+        {
+
+        }
+
+        /// <summary>
+        /// Конструктор с параметрами базового класса и данного
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="datebirth"></param>
+        /// <param name="p"></param>
+        /// <param name="specialization"></param>
+        public Engineer(string name, string surname, DateTime datebirth, double p, string specialization)
+            :base(name, surname, datebirth, p)
+        {
+            this.specialization = specialization;
+        }
+
+        /// <summary>
+        /// Свойство Специализации
+        /// </summary>
+        public string Specialization { get { return specialization; } set { specialization = value; } }
+
+        /// <summary>
+        /// Метод определения коэфицента специализации
+        /// </summary>
+        /// <param name="k"></param>
+        /// <returns></returns>
+        public override double Incomecalculation(double k)
+        {
+            return base.Incomecalculation(k);
+        }
+
+        /// <summary>
+        /// Метод для вывода специализации
+        /// </summary>
+        public new void Print()
+        {
+            base.Print();
+            Console.WriteLine($"Инженерная специализация: {specialization}");
+        }
+
+abstract class Employee2
+    {
+        /// <summary>
+        /// Абстрактный метод для подсчёта
+        /// </summary>
+        /// <returns></returns>
+        public abstract double Incomecalculation();
+        /// <summary>
+        /// Абстрактный метод для вывода
+        /// </summary>
+        public abstract void Print();
+    }
+
+
+class Manager : Employee /*Employee2*/
+    {
+        /// <summary>
+        /// Поле бонус
+        /// </summary>
+        private double bonus;
+
+        /// <summary>
+        /// Конструктор без параметров
+        /// </summary>
+        public Manager()
+        {
+
+        }
+
+        //public Manager(double bonus)
+        //{
+        //    this.bonus = bonus;
+        //}
+
+        /// <summary>
+        /// Конструктор с параметрами данного класса с базовым
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="datebirth"></param>
+        /// <param name="p"></param>
+        /// <param name="bonus"></param>
+        public Manager(string name, string surname, DateTime datebirth, double p, double bonus)
+            : base(name, surname, datebirth, p)
+        {
+            this.bonus = bonus;
+        }
+
+        /// <summary>
+        /// Свойство Бонус
+        /// </summary>
+        public double Bonus { get { return bonus; } set { bonus = value; } }
+
+        /// <summary>
+        /// Метод для определения бонуса
+        /// </summary>
+        /// <param name="k"></param>
+        /// <returns></returns>
+        public override double Incomecalculation(double k)
+        {
+            return /*50000 */ k + bonus;
+        }
+
+        /// <summary>
+        /// Метод для вывода бонуса Менеджера
+        /// </summary>
+        public new void Print()
+        {
+            base.Print();
+            Console.WriteLine($"Менеджер бонус: {bonus}");
+        }
+
+        //public override void Print()
+        //{
+        //    Console.WriteLine($"Менеджер - Бонус: {bonus}");
+        //}
+
+class Developer : Employee2
+    {
+        /// <summary>
+        /// Поле зарплата
+        /// </summary>
+        private double salary;
+
+        /// <summary>
+        /// Конструктор с одним параметром
+        /// </summary>
+        /// <param name="salary"></param>
+        public Developer(double salary)
+        {
+            this.salary = salary;
+        }
+
+        /// <summary>
+        /// Метод для определения зарплаты
+        /// </summary>
+        /// <returns></returns>
+        public override double Incomecalculation()
+        {
+            return salary;
+        }
+
+        /// <summary>
+        /// Метод для вывода информации по зарпалате
+        /// </summary>
+        public override void Print()
+        {
+            Console.WriteLine($"Разработчик - зарплата: {salary}");
+        }
+
+static void Main(string[] args)
+        {
+            Console.WriteLine("Введите данные по Менаджерам и Инжинерам ");
+            Employee[] employees = new Employee[]
+            {
+                new Manager
+                {
+                Name = Console.ReadLine(), Surname = Console.ReadLine(), Datebirth = DateTime.Parse(Console.ReadLine()),
+                P = double.Parse(Console.ReadLine()), Bonus = 1.2
+                },
+                new Engineer
+                {
+                    Name = Console.ReadLine(), Surname = Console.ReadLine(), Datebirth = DateTime.Parse(Console.ReadLine()),
+                    P = double.Parse(Console.ReadLine()), Specialization = Console.ReadLine()
+                },
+                new Manager
+                {
+                    Name = Console.ReadLine(), Surname = Console.ReadLine(), Datebirth = DateTime.Parse(Console.ReadLine()),
+                    P = double.Parse(Console.ReadLine()), Bonus = 1.2
+                },
+                new Engineer
+                {
+                    Name = Console.ReadLine(), Surname = Console.ReadLine(), Datebirth = DateTime.Parse(Console.ReadLine()),
+                    P = double.Parse(Console.ReadLine()), Specialization = Console.ReadLine()
+                }
+            };
+
+            foreach (var employee in employees)
+            {
+                double income = employee.Incomecalculation(1.2);
+                Console.WriteLine($"Коэфицент: {income}");
+                employee.Print();
+                Console.WriteLine();
+            }
+
+            //Console.WriteLine("Данные по сотрудникам: ");
+            //Console.WriteLine();
+            //List<Employee2> employees = new List<Employee2>
+            //{
+            //    new Manager(10000),
+            //    new Developer(6000),
+            //    new Manager(15000),
+            //    new Developer(7000),
+            //    new Developer(8000)
+            //};
+
+            //double totalIncome = 0;
+            //double maxManagerBonus = 0;
+
+            //foreach(var employee in employees)
+            //{
+            //    totalIncome += employee.Incomecalculation();
+            //    employee.Print();
+
+            //    if(employee is Manager manager)
+            //    {
+            //        double manegerBonus = manager.Incomecalculation() - 50000;
+            //        maxManagerBonus = Math.Max(maxManagerBonus, manegerBonus);
+            //    }
+            //}
+
+
+            //Console.WriteLine($"Полное Количество всех сотрудников: {totalIncome}");
+            //Console.WriteLine($"Максимальный Бонус для Менеджеров: {maxManagerBonus} ");
+
+            Console.ReadKey();
+           }
